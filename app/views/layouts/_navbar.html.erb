@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" aria-label="Fourth navbar example">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Demo Blog</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExample04">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item">
+          <%= link_to "Home", root_path, class:"nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "About", about_path, class:"nav-link" %>
+        </li>
+        <li class="nav-item dropdown">
+        <% if current_user %>
+          <a class="nav-link dropdown-toggle show" href="#" id="dropdown04" data-bs-toggle="dropdown" aria-expanded="true"><%= current_user.email %></a>
+          <ul class="dropdown-menu show text-end" aria-labelledby="dropdown04" data-bs-popper="none">
+            <% if current_user.admin %>
+              <li>
+                <%= link_to "New Post", root_path, class:"dropdown-item" %>
+            <% end %>
+
+            <li>
+              <%= link_to "Account Settings", edit_user_registration_path, class:"dropdown-item" %>    
+            </li>
+            <div class="dropdown-divider"></div>
+            <li>
+              <%= link_to "Logout", destroy_user_session_path, class:'dropdown-item', method: :delete %>
+            </li>
+            <div class="dropdown-divider"></div>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <% else %>
+        <li>
+          <% if user_signed_in? %>
+            <%= link_to "Log Out", destroy_user_session_path, class:"btn btn-outline-light me-2", method: :delete %>
+          <% else %>
+            <%= link_to "Log In", new_user_session_path, type:"button", class:"btn btn-outline-light me-2" %>
+            <%= link_to "Sign Up", new_user_registration_path, type:"button", class:"btn btn-warning" %>
+          <% end %>
+        </li>
+
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
